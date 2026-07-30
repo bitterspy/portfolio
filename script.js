@@ -126,6 +126,7 @@
         typingEl.remove();
         addMessage(reply, "bot");
         history.push({ role: "assistant", content: reply });
+        copyBtn.hidden = false;
       })
       .catch(function () {
         typingEl.remove();
@@ -137,19 +138,11 @@
       });
   });
 
-  copyBtn.addEventListener("click", function () {
-    if (history.length <= 2) {
-      copyBtn.textContent = "…";
-      copyBtn.disabled = true;
-      setTimeout(function () {
-        copyBtn.textContent = "⧉";
-        copyBtn.disabled = false;
-      }, 800);
-      return;
-    }
+  var COPY_LABEL = "⧉ Skopiuj podsumowanie";
 
+  copyBtn.addEventListener("click", function () {
     copyBtn.disabled = true;
-    copyBtn.textContent = "…";
+    copyBtn.textContent = "Generuję…";
 
     var summaryRequest = history.concat([{
       role: "user",
@@ -163,14 +156,14 @@
         return navigator.clipboard.writeText(text);
       })
       .then(function () {
-        copyBtn.textContent = "✓";
+        copyBtn.textContent = "✓ Skopiowano";
       })
       .catch(function () {
-        copyBtn.textContent = "!";
+        copyBtn.textContent = "Nie udało się";
       })
       .finally(function () {
         setTimeout(function () {
-          copyBtn.textContent = "⧉";
+          copyBtn.textContent = COPY_LABEL;
           copyBtn.disabled = false;
         }, 1800);
       });

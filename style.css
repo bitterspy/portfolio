@@ -452,7 +452,7 @@ h1, h2, h3 { margin: 0; }
 }
 
 .chat__panel {
-  width: min(260px, calc(100vw - 48px));
+  width: min(340px, calc(100vw - 48px));
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -479,8 +479,7 @@ h1, h2, h3 { margin: 0; }
 .chat__header div { display: flex; flex-direction: column; }
 .chat__header strong { font-size: 0.95rem; }
 .chat__header span { font-size: 0.75rem; opacity: 0.85; }
-.chat__header-actions { display: flex; gap: 8px; }
-.chat__close, .chat__copy {
+.chat__close {
   background: rgba(255,255,255,0.15);
   border: none;
   color: #fff;
@@ -490,6 +489,21 @@ h1, h2, h3 { margin: 0; }
   cursor: pointer;
   font-size: 0.8rem;
 }
+
+.chat__copy[hidden] { display: none; }
+.chat__copy {
+  margin: 0 16px 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.chat__copy:hover { border-color: var(--violet); color: var(--violet); }
 .chat__copy:disabled { cursor: default; opacity: 0.7; }
 
 .chat__messages {
@@ -542,9 +556,13 @@ h1, h2, h3 { margin: 0; }
   background: var(--bg-alt);
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 10px 16px;
+  padding: 10px 14px;
   color: var(--text);
-  font-size: 0.87rem;
+  font-size: 0.8rem;
+}
+.chat__input::placeholder {
+  overflow: visible;
+  text-overflow: clip;
 }
 .chat__input:focus { outline: 1px solid var(--violet); }
 .chat__send {

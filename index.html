@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Portfolio Connect — Kupbezposrednio.pl, BT-Styl, damcar, 21'BROTHERS.">
 <meta name="twitter:image" content="https://ivy202-44591.mikrus.cloud/images/kupbezposrednio.jpg">
 
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -169,15 +169,13 @@
         <strong>Connect</strong>
         <span>Zapytaj o swoją nową stronę</span>
       </div>
-      <div class="chat__header-actions">
-        <button class="chat__copy" id="chatCopy" aria-label="Skopiuj rozmowę" title="Skopiuj rozmowę">⧉</button>
-        <button class="chat__close" id="chatClose" aria-label="Zamknij czat">✕</button>
-      </div>
+      <button class="chat__close" id="chatClose" aria-label="Zamknij czat">✕</button>
     </div>
     <div class="chat__messages" id="chatMessages" hidden></div>
+    <button class="chat__copy" id="chatCopy" hidden>⧉ Skopiuj podsumowanie</button>
     <div class="chat__bar">
       <form class="chat__form" id="chatForm">
-        <input class="chat__input" id="chatInput" type="text" placeholder="Porozmawiaj z naszym agentem na żywo" autocomplete="off">
+        <input class="chat__input" id="chatInput" type="text" placeholder="Porozmawiaj z naszym agentem" autocomplete="off">
         <button class="chat__send" type="submit" aria-label="Wyślij">↑</button>
       </form>
       <button class="chat__toggle" id="chatToggle" aria-label="Otwórz czat">
@@ -189,6 +187,6 @@
   </div>
 </div>
 
-<script src="script.js?v=4"></script>
+<script src="script.js?v=6"></script>
 </body>
 </html>
