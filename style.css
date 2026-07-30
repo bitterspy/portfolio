@@ -228,19 +228,20 @@ h1, h2, h3 { margin: 0; }
   object-fit: cover;
   object-position: top;
   opacity: 0;
-  animation: mock-crossfade 7.5s infinite;
+  animation: mock-crossfade 24s infinite;
 }
 .mock__screen--f1 { animation-delay: 0s; }
-.mock__screen--f2 { animation-delay: 1.5s; }
-.mock__screen--f3 { animation-delay: 3s; }
-.mock__screen--f4 { animation-delay: 4.5s; }
-.mock__screen--f5 { animation-delay: 6s; }
+.mock__screen--f2 { animation-delay: 4s; }
+.mock__screen--f3 { animation-delay: 8s; }
+.mock__screen--f4 { animation-delay: 12s; }
+.mock__screen--f4b { animation-delay: 16s; }
+.mock__screen--f5 { animation-delay: 20s; }
 
 @keyframes mock-crossfade {
   0% { opacity: 0; }
-  4% { opacity: 1; }
-  16% { opacity: 1; }
-  20% { opacity: 0; }
+  3% { opacity: 1; }
+  13% { opacity: 1; }
+  16% { opacity: 0; }
   100% { opacity: 0; }
 }
 
