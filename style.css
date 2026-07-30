@@ -244,10 +244,6 @@ h1, h2, h3 { margin: 0; }
   100% { opacity: 0; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .mock__screen { animation: none; opacity: 0; }
-  .mock__screen--f1 { opacity: 1; }
-}
 .hero__stats {
   margin-top: 22px;
   display: flex;
