@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Portfolio Connect — Kupbezposrednio.pl, BT-Styl, damcar, 21'BROTHERS.">
 <meta name="twitter:image" content="https://ivy202-44591.mikrus.cloud/images/kupbezposrednio.jpg">
 
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
@@ -53,10 +53,10 @@
       </div>
       <div class="hero__mock">
         <p class="hero__mock-label">Nasza realizacja — kupbezposrednio.pl</p>
-        <div class="mock">
+        <a class="mock" href="https://kupbezposrednio.pl" target="_blank" rel="noopener">
           <div class="mock__bar"><span></span><span></span><span></span></div>
           <img class="mock__screen" src="images/kupbezposrednio.jpg" alt="Kupbezposrednio.pl — zrzut ekranu strony">
-        </div>
+        </a>
         <div class="hero__stats">
           <div class="stat"><strong>4</strong><span>projekty</span></div>
           <div class="stat"><strong>100%</strong><span>real code</span></div>
@@ -169,14 +169,15 @@
         <strong>Connect</strong>
         <span>Zapytaj o swoją nową stronę</span>
       </div>
-      <button class="chat__close" id="chatClose" aria-label="Zamknij czat">✕</button>
+      <div class="chat__header-actions">
+        <button class="chat__copy" id="chatCopy" aria-label="Skopiuj rozmowę" title="Skopiuj rozmowę">⧉</button>
+        <button class="chat__close" id="chatClose" aria-label="Zamknij czat">✕</button>
+      </div>
     </div>
-    <div class="chat__messages" id="chatMessages" hidden>
-      <div class="chat__msg chat__msg--bot">Cześć! Widzę, że przeglądasz portfolio Connect 👋 Jakiego rodzaju stronę chcesz zbudować?</div>
-    </div>
+    <div class="chat__messages" id="chatMessages" hidden></div>
     <div class="chat__bar">
       <form class="chat__form" id="chatForm">
-        <input class="chat__input" id="chatInput" type="text" placeholder="Napisz wiadomość…" autocomplete="off">
+        <input class="chat__input" id="chatInput" type="text" placeholder="Porozmawiaj z naszym agentem na żywo" autocomplete="off">
         <button class="chat__send" type="submit" aria-label="Wyślij">↑</button>
       </form>
       <button class="chat__toggle" id="chatToggle" aria-label="Otwórz czat">
@@ -188,6 +189,6 @@
   </div>
 </div>
 
-<script src="script.js?v=3"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>
