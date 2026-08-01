@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Portfolio Connect + kreator stylu strony"
+  "description": "Portfolio Connect + kreator stylu strony",
+  "engines": {
+    "node": "22.x"
+  }
 }
