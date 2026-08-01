@@ -458,8 +458,23 @@ h1, h2, h3 { margin: 0; }
 
 @media (max-width: 640px) {
   .hero { padding: 72px 18px 72px; }
-  .work, .skills, .contact { padding-left: 18px; padding-right: 18px; }
+  .work, .skills, .contact, .creator-cta { padding-left: 18px; padding-right: 18px; }
   .contact__card { padding: 40px 26px; }
+  .creator-cta__card { padding: 34px 24px; }
+
+  /* Nawigacja nie miescila sie w jednym rzedzie i dawala poziomy scroll:
+     ukrywamy nazwisko i sciskamy odstepy miedzy linkami. */
+  .nav__inner { gap: 10px; padding: 14px 18px; }
+  .nav__name { display: none; }
+  .nav__links { gap: 16px; }
+  .nav__links a { font-size: 0.85rem; }
+  .nav__cta { padding: 8px 14px; }
+}
+
+@media (max-width: 400px) {
+  .nav__links { gap: 12px; }
+  .nav__links a { font-size: 0.8rem; }
+  .nav__brand { font-size: 0.95rem; }
 }
 
 /* Chat widget */
