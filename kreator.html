@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kreator stylu — dobierz wygląd swojej strony | Connect</title>
+<meta name="description" content="Opisz swoją firmę, a dobierzemy style graficzne pasujące do jej charakteru. Wybierz dwa ulubione i wyślij brief.">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kreator stylu — Connect">
+<meta property="og:description" content="Opisz swoją firmę, a dobierzemy style graficzne pasujące do jej charakteru.">
+
+<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="kreator.css?v=1">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html#top" class="nav__mark">C</a>
+    <a href="index.html#top" class="nav__brand">Connect</a>
+    <span class="nav__name">Wojciech Spychała</span>
+    <nav class="nav__links">
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#umiejetnosci">Umiejętności</a>
+      <a href="index.html#kontakt" class="nav__cta">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main class="kr">
+
+  <section class="kr__head">
+    <p class="section-eyebrow">Kreator stylu</p>
+    <h1 class="kr__title">Jak ma <em>wyglądać</em> Twoja strona?</h1>
+    <p class="kr__lead">
+      Opisz swoją firmę własnymi słowami. Dobierzemy style graficzne pasujące do jej charakteru,
+      a Ty wskażesz te, które trafiają w Twój gust. Zajmie to dwie minuty.
+    </p>
+  </section>
+
+  <ol class="kr__steps" aria-label="Postęp">
+    <li class="kr__step is-active" data-step="1"><span>1</span> Opis firmy</li>
+    <li class="kr__step" data-step="2"><span>2</span> Wybór stylu</li>
+    <li class="kr__step" data-step="3"><span>3</span> Kontakt</li>
+  </ol>
+
+  <!-- KROK 1 -->
+  <section class="kr__panel is-active" id="step-1">
+    <form id="brief-form" novalidate>
+      <label class="kr__label" for="brief">Czym się zajmujesz i dla kogo?</label>
+      <p class="kr__hint">
+        Im więcej konkretów, tym lepsze dopasowanie. Napisz o branży, klientach i o tym,
+        jakie wrażenie ma robić strona.
+      </p>
+      <textarea id="brief" class="kr__textarea" rows="6" maxlength="1200"
+        placeholder="Np. Prowadzę kawiarnię specialty w centrum Szczecina. Klienci to głównie młodzi ludzie i osoby pracujące zdalnie. Chcę, żeby strona była przytulna, ale nowoczesna — bez taniej stockowej fotografii."></textarea>
+      <div class="kr__row">
+        <span class="kr__count"><span id="brief-count">0</span> / 1200</span>
+        <button type="submit" class="btn btn--primary" id="brief-submit">Dobierz style</button>
+      </div>
+      <p class="kr__error" id="brief-error" hidden></p>
+    </form>
+  </section>
+
+  <!-- KROK 2 -->
+  <section class="kr__panel" id="step-2">
+    <div class="kr__pickhead">
+      <div>
+        <h2 class="kr__h2">Wybierz dwa style, które Ci się podobają</h2>
+        <p class="kr__hint" id="pick-hint">Kliknij kafelek, żeby zaznaczyć. Możesz wybrać od jednego do dwóch.</p>
+      </div>
+      <button type="button" class="btn btn--ghost btn--sm" id="back-1">Zmień opis</button>
+    </div>
+
+    <div class="kr__loading" id="loading" hidden>
+      <span class="kr__spinner" aria-hidden="true"></span> Dobieram style do Twojego opisu…
+    </div>
+
+    <div class="kr__grid" id="grid"></div>
+
+    <div class="kr__pickbar" id="pickbar" hidden>
+      <span class="kr__picked" id="picked-label">Zaznaczono: 0</span>
+      <button type="button" class="btn btn--primary" id="to-3" disabled>Dalej — dane kontaktowe</button>
+    </div>
+  </section>
+
+  <!-- KROK 3 -->
+  <section class="kr__panel" id="step-3">
+    <div class="kr__pickhead">
+      <div>
+        <h2 class="kr__h2">Gdzie odesłać wycenę?</h2>
+        <p class="kr__hint">Odezwiemy się z propozycją i orientacyjnym kosztem. Bez spamu.</p>
+      </div>
+      <button type="button" class="btn btn--ghost btn--sm" id="back-2">Wróć do stylów</button>
+    </div>
+
+    <div class="kr__summary" id="summary"></div>
+
+    <form id="contact-form" novalidate>
+      <div class="kr__fields">
+        <div class="kr__field">
+          <label class="kr__label" for="c-name">Imię <span class="kr__req">*</span></label>
+          <input id="c-name" class="kr__input" type="text" maxlength="120" autocomplete="given-name" required>
+        </div>
+        <div class="kr__field">
+          <label class="kr__label" for="c-email">E-mail <span class="kr__req">*</span></label>
+          <input id="c-email" class="kr__input" type="email" maxlength="160" autocomplete="email" required>
+        </div>
+        <div class="kr__field">
+          <label class="kr__label" for="c-phone">Telefon</label>
+          <input id="c-phone" class="kr__input" type="tel" maxlength="60" autocomplete="tel">
+        </div>
+        <div class="kr__field">
+          <label class="kr__label" for="c-company">Nazwa firmy</label>
+          <input id="c-company" class="kr__input" type="text" maxlength="160" autocomplete="organization">
+        </div>
+      </div>
+
+      <label class="kr__label" for="c-note">Coś jeszcze, co powinniśmy wiedzieć?</label>
+      <textarea id="c-note" class="kr__textarea kr__textarea--sm" rows="3" maxlength="1000"
+        placeholder="Termin, budżet, strona konkurencji która Ci się podoba…"></textarea>
+
+      <div class="kr__row">
+        <span class="kr__hint kr__hint--tiny">Wysyłając, zgadzasz się na kontakt w sprawie tego zapytania.</span>
+        <button type="submit" class="btn btn--primary" id="send-btn">Wyślij zgłoszenie</button>
+      </div>
+      <p class="kr__error" id="send-error" hidden></p>
+    </form>
+  </section>
+
+  <!-- SUKCES -->
+  <section class="kr__panel kr__done" id="step-done">
+    <div class="kr__check" aria-hidden="true">✓</div>
+    <h2 class="kr__h2">Dziękujemy — brief poszedł w świat</h2>
+    <p class="kr__lead kr__lead--sm">
+      Odezwiemy się na podany adres, zwykle w ciągu jednego dnia roboczego.
+    </p>
+    <a href="index.html#portfolio" class="btn btn--ghost">Zobacz nasze realizacje</a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> Connect — Wojciech Spychała · <a href="index.html#kontakt">Kontakt</a></p>
+</footer>
+
+<script src="kreator.js?v=1"></script>
+</body>
+</html>

@@ -357,6 +357,48 @@ h1, h2, h3 { margin: 0; }
 }
 
 /* Contact */
+/* CTA kreatora stylu - ciemna karta, zeby nie konkurowala
+   z pelnym gradientem sekcji kontaktowej pod spodem */
+.creator-cta {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+.creator-cta__card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.creator-cta__card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--grad);
+}
+.creator-cta h2 {
+  font-size: clamp(1.6rem, 3.6vw, 2.3rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.creator-cta h2 em {
+  font-style: normal;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.creator-cta__lead {
+  color: var(--text-dim);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 28px;
+  max-width: 640px;
+}
+
 .contact {
   max-width: 1180px;
   margin: 0 auto;
