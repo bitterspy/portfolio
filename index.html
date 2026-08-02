@@ -42,6 +42,7 @@
     <div class="hero__glow"></div>
     <div class="hero__inner">
       <div class="hero__text">
+        <p class="section-eyebrow hero__eyebrow">strony www + kreator stylu</p>
         <h1 class="hero__headline">
           <span class="h-line1">Wyrzuć swoją <em>starą</em></span>
           <span class="h-line2"><span class="h-tiny">stronę.</span></span>
@@ -50,12 +51,30 @@
         </h1>
         <p class="hero__lead">Projektuję i wdrażam strony i aplikacje webowe — od pomysłu, przez kod, po działającą produkcję.</p>
         <div class="hero__cta">
-          <a href="#portfolio" class="btn btn--primary">zobacz portfolio</a>
-          <a href="kreator.html" class="btn btn--ghost">napisz nam co potrzebujesz</a>
+          <a href="tel:+48694515715" class="hero__phone"><span aria-hidden="true">☎</span> 694 515 715</a>
+          <a href="#portfolio" class="btn btn--ghost">zobacz portfolio</a>
         </div>
       </div>
-      <div class="hero__mock">
-        <p class="hero__mock-label">Nasza realizacja — kupbezposrednio.pl</p>
+
+      <form class="hero__form" id="heroCreatorForm">
+        <p class="hero__form-eyebrow">kreator stylu</p>
+        <h2 class="hero__form-title">Zobaczymy, jak może wyglądać Twoja strona</h2>
+        <p class="hero__form-hint">Napisz dwa zdania o swojej firmie. Dobierzemy style i pokażemy podglądy — bez zobowiązań.</p>
+        <label class="hero__form-label" for="heroBrief">Czym się zajmujesz i dla kogo?</label>
+        <textarea id="heroBrief" class="hero__form-textarea" rows="3" maxlength="1200"
+          placeholder="Np. Prowadzę kawiarnię specialty w centrum Szczecina, klienci to głównie młodzi ludzie…"></textarea>
+        <button type="submit" class="btn btn--primary hero__form-submit">Dobierz style mojej strony →</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="portfolio" class="work">
+    <p class="section-eyebrow">realizacje</p>
+    <h2 class="work__title">Portfolio</h2>
+
+    <div class="work__grid">
+
+      <div class="work__item work__item--live work__featured">
         <a class="mock" href="https://kupbezposrednio.pl" target="_blank" rel="noopener">
           <div class="mock__bar"><span></span><span></span><span></span></div>
           <div class="mock__reel">
@@ -67,34 +86,15 @@
             <img class="mock__screen mock__screen--f5" src="images/hero/frame5-map.jpg?v=2" alt="Kupbezposrednio.pl — mapa ogłoszeń">
           </div>
         </a>
-        <div class="hero__stats">
-          <div class="stat"><strong>4</strong><span>projekty</span></div>
-          <div class="stat"><strong>100%</strong><span>real code</span></div>
-          <div class="stat"><strong>3</strong><span>live już dziś</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="portfolio" class="work">
-    <p class="section-eyebrow">realizacje</p>
-    <h2 class="work__title">Portfolio</h2>
-
-    <div class="work__grid">
-
-      <a href="https://kupbezposrednio.pl" target="_blank" rel="noopener" class="work__item work__item--live">
-        <div class="work__thumb">
-          <img src="images/kupbezposrednio.jpg" alt="Kupbezposrednio.pl — zrzut ekranu strony">
-          <span class="work__thumb-tag work__thumb-tag--live">live</span>
-        </div>
         <div class="work__meta">
-          <h3>kupbezposrednio<span class="dim">.pl</span></h3>
+          <p class="work__featured-label">Nasza realizacja — flagowy projekt</p>
+          <h3>kupbezposrednio<span class="dim">.pl</span> <span class="work__thumb-tag work__thumb-tag--live">live</span></h3>
           <p>Portal ogłoszeń nieruchomości bez pośredników. Weryfikacja właściciela przez numer Księgi Wieczystej.</p>
           <ul class="work__tags">
             <li>Next.js</li><li>Supabase</li><li>Mapbox</li>
           </ul>
         </div>
-      </a>
+      </div>
 
       <a href="https://bt-styl.netlify.app" target="_blank" rel="noopener" class="work__item work__item--live">
         <div class="work__thumb">
@@ -153,18 +153,6 @@
     </ul>
   </section>
 
-  <section class="creator-cta">
-    <div class="creator-cta__card">
-      <p class="section-eyebrow">kreator stylu</p>
-      <h2>Nie wiesz, jak ma <em>wyglądać</em>?</h2>
-      <p class="creator-cta__lead">
-        Opisz swoją firmę w dwóch zdaniach, a dobierzemy style graficzne pasujące do jej charakteru.
-        Zobaczysz podglądy, wskażesz te, które Ci się podobają — i tyle.
-      </p>
-      <a href="kreator.html" class="btn btn--primary">Dobierz styl swojej strony</a>
-    </div>
-  </section>
-
   <section id="kontakt" class="contact">
     <div class="contact__card">
       <p class="section-eyebrow">kontakt</p>
@@ -183,5 +171,19 @@
   <p>Wojciech Spychała — 2026</p>
 </footer>
 
+<script>
+  (function () {
+    var form = document.getElementById("heroCreatorForm");
+    var textarea = document.getElementById("heroBrief");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = textarea.value.trim();
+      if (v) {
+        try { sessionStorage.setItem("connect_hero_brief", v); } catch (err) {}
+      }
+      window.location.href = "kreator.html";
+    });
+  })();
+</script>
 </body>
 </html>

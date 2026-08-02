@@ -272,4 +272,18 @@
   });
 
   $("year").textContent = new Date().getFullYear();
+
+  // Klient mogl juz opisac firme w formularzu na stronie glownej (hero).
+  // Podchwytujemy ten tekst i od razu odpalamy dopasowanie, zeby nie kazac
+  // mu pisac drugi raz.
+  (function pickUpHeroBrief() {
+    var v;
+    try { v = sessionStorage.getItem("connect_hero_brief"); } catch (err) { return; }
+    if (!v) return;
+    try { sessionStorage.removeItem("connect_hero_brief"); } catch (err) {}
+    el.brief.value = v;
+    el.briefCount.textContent = v.length;
+    if (typeof el.briefForm.requestSubmit === "function") el.briefForm.requestSubmit();
+    else el.briefForm.dispatchEvent(new Event("submit", { cancelable: true }));
+  })();
 })();
