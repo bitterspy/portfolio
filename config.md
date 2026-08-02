@@ -46,15 +46,19 @@ potem przenieś zmiany do HTML.
 4. Umiejętności — lista technologii (Next.js, React, TypeScript, Tailwind, Supabase, Node.js, Vercel, git)
 5. Kontakt — email, telefon, GitHub
 
-## Czat AI (widget na stronie)
+## Kreator stylu (`/kreator.html`)
 
-- Provider: Groq (chat completions, model llama), endpoint wywoływany bezpośrednio z frontendu (`script.js`)
-- Klucz API: współdzielony z produkcją Kupbezposrednio (`GROQ_API_KEY` z `Kupbezposrednio/CREDENTIALS.md`) — świadomie użyty tu mimo że jest widoczny w źródle strony (patrz TODO niżej)
-- System prompt: zachęcać klienta do kontaktu, chwalić jakość zrobionych stron/realizacji
-- **WAŻNE**: w repo GitHub (`script.js` na GitHubie) klucz jest zastąpiony placeholderem `WPISZ_TU_KLUCZ_GROQ_PRZED_DEPLOYEM` — GitHub push protection blokował push z prawdziwym kluczem. Prawdziwy klucz jest wpisany TYLKO w pliku na serwerze produkcyjnym `/var/www/html/script.js` (mikr.us). Jeśli redeployujesz z repo, pamiętaj wkleić realny klucz z powrotem przed wgraniem na serwer — albo lepiej, dokończ TODO poniżej i przejdź na osobny dedykowany klucz.
+Zastąpił czat AI (usunięty 2026-08-02 — trzymał klucz Groq wprost w kodzie frontendu, więc byłby publiczny).
+
+- Trzy kroki: opis firmy → wybór 2 z 6 dobranych stylów → formularz kontaktowy
+- `api/match-style.js` — filtr słów kluczowych po `data/styles.json` (106 stylów), potem Groq układa kolejność i pisze uzasadnienia. Bez klucza działa sam filtr.
+- `api/send-brief.js` — wysyłka briefu przez Resend na connect.szczecin@gmail.com
+- Klucze **wyłącznie po stronie serwera**, jako zmienne środowiskowe Vercela: `GROQ_API_KEY` (ustawiony, dedykowany dla tego projektu), `RESEND_API_KEY` (do ustawienia)
+- Podglądy stylów renderowane na żywo z tokenów w `styles.json` — to, co klient wybierze, tak zostanie zbudowane
 
 ## TODO
 
 - [x] Ustalić live URL dla BT-Styl i damcar (Netlify: bt-styl.netlify.app, damcar.netlify.app) + dodano 21brothers-demo.netlify.app
 - [x] Zrobić realny screenshot Kupbezposrednio.pl w przeglądarce
-- [ ] **Zmienić klucz Groq użyty w czacie na stronie na osobny, dedykowany klucz** — obecnie używany jest ten sam klucz co w produkcyjnym Kupbezposrednio, wpisany wprost w JS frontendu (widoczny publicznie w źródle strony). Ryzyko: ktoś wyciągnie klucz i wyczerpie limit/budżet współdzielony z produkcją. Założyć nowy klucz w Groq Console dedykowany portfolio, z osobnym niskim limitem. Po założeniu: wpisać go zarówno w lokalnym `repo/script.js` (do commitowania jako placeholder trzeba pamiętać) jak i bezpośrednio na serwerze.
+- [x] Osobny klucz Groq dla portfolio — zrobione 2026-08-02, klucz siedzi w zmiennych Vercela, nie w kodzie
+- [ ] Założyć konto Resend i ustawić `RESEND_API_KEY` — bez tego formularz kreatora nie wyśle briefu
