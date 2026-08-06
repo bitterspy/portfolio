@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="theme.js?v=1"></script>
 <title>Wyrzuć swoją starą stronę — zbuduj z nami nową</title>
 <meta name="description" content="Wyrzuć swoją starą stronę. Zbuduj z nami nową. Portfolio Connect — Kupbezposrednio.pl, BT-Styl, damcar, 21'BROTHERS.">
 
@@ -32,6 +33,7 @@
       <a href="#portfolio">Portfolio</a>
       <a href="#umiejetnosci">Umiejętności</a>
       <a href="#kontakt" class="nav__cta">Kontakt</a>
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Przełącz jasny/ciemny motyw">☀︎</button>
     </nav>
   </div>
 </header>
@@ -56,15 +58,16 @@
         </div>
       </div>
 
-      <form class="hero__form" id="heroCreatorForm">
-        <p class="hero__form-eyebrow">kreator stylu</p>
-        <h2 class="hero__form-title">Zobaczymy, jak może wyglądać Twoja strona</h2>
-        <p class="hero__form-hint">Napisz dwa zdania o swojej firmie. Dobierzemy style i pokażemy podglądy — bez zobowiązań.</p>
-        <label class="hero__form-label" for="heroBrief">Czym się zajmujesz i dla kogo?</label>
-        <textarea id="heroBrief" class="hero__form-textarea" rows="3" maxlength="1200"
-          placeholder="Np. Prowadzę kawiarnię specialty w centrum Szczecina, klienci to głównie młodzi ludzie…"></textarea>
-        <button type="submit" class="btn btn--primary hero__form-submit">Dobierz style mojej strony →</button>
-      </form>
+      <div class="chat" id="chat">
+        <p class="hero__form-eyebrow">bot doradca</p>
+        <h2 class="hero__form-title">Wyrzucamy starą stronę. Porozmawiajmy, jaka ma być nowa</h2>
+        <div class="chat__log" id="chatLog" aria-live="polite"></div>
+        <form class="chat__composer" id="chatForm">
+          <input type="text" id="chatInput" class="chat__input" autocomplete="off" placeholder="Twoja odpowiedź…">
+          <button type="submit" class="btn btn--primary chat__send" id="chatSend">Wyślij</button>
+        </form>
+        <div class="chat__chips" id="chatChips" hidden></div>
+      </div>
     </div>
   </section>
 
@@ -171,19 +174,6 @@
   <p>Wojciech Spychała — 2026</p>
 </footer>
 
-<script>
-  (function () {
-    var form = document.getElementById("heroCreatorForm");
-    var textarea = document.getElementById("heroBrief");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var v = textarea.value.trim();
-      if (v) {
-        try { sessionStorage.setItem("connect_hero_brief", v); } catch (err) {}
-      }
-      window.location.href = "kreator.html";
-    });
-  })();
-</script>
+<script src="chat.js?v=1"></script>
 </body>
 </html>

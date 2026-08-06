@@ -1,5 +1,5 @@
 const TO = "connect.szczecin@gmail.com";
-const FROM = process.env.BRIEF_FROM || "Kreator stylu <onboarding@resend.dev>";
+const FROM = process.env.BRIEF_FROM || "Bot doradca <onboarding@resend.dev>";
 
 function esc(v) {
   return String(v == null ? "" : v)
@@ -13,37 +13,22 @@ function validEmail(v) {
   return typeof v === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
 }
 
-function swatches(palette) {
-  if (!palette) return "";
-  return Object.entries(palette)
+function answersHtml(answers) {
+  return answers
     .map(
-      ([k, v]) =>
-        '<span style="display:inline-block;margin:0 6px 6px 0;padding:4px 8px;border:1px solid #ddd;border-radius:4px;font:12px monospace">' +
-        '<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:' +
-        esc(v) +
-        ';border:1px solid rgba(0,0,0,.2);vertical-align:middle;margin-right:6px"></span>' +
-        esc(k) + " " + esc(v) +
-        "</span>"
+      (a) =>
+        '<div style="margin:0 0 12px">' +
+        '<div style="font:700 13px system-ui;color:#666;text-transform:uppercase;letter-spacing:.04em">' + esc(a.question) + "</div>" +
+        '<div style="font:400 14px/1.5 system-ui;color:#222;margin-top:2px;white-space:pre-wrap">' + esc(a.answer) + "</div>" +
+        "</div>"
     )
     .join("");
 }
 
 function buildHtml(d) {
-  const chosen = d.chosen
-    .map(
-      (s, i) =>
-        '<div style="border:1px solid #e2e2e6;border-radius:10px;padding:14px 16px;margin:0 0 12px">' +
-        '<div style="font:700 15px system-ui;color:#111">' + (i + 1) + ". " + esc(s.name) +
-        ' <span style="font:400 12px system-ui;color:#888">(' + esc(s.id) + " · " + esc(s.family) + ")</span></div>" +
-        (s.reason ? '<div style="font:400 13px/1.5 system-ui;color:#555;margin-top:6px">' + esc(s.reason) + "</div>" : "") +
-        '<div style="margin-top:10px">' + swatches(s.palette) + "</div>" +
-        "</div>"
-    )
-    .join("");
-
   return (
     '<div style="font:400 14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#222;max-width:640px">' +
-    '<h2 style="font:700 19px system-ui;margin:0 0 4px">Nowy brief z kreatora stylu</h2>' +
+    '<h2 style="font:700 19px system-ui;margin:0 0 4px">Nowe zgłoszenie z bota-doradcy</h2>' +
     '<p style="color:#777;margin:0 0 20px;font-size:13px">' + esc(d.stamp) + "</p>" +
 
     '<h3 style="font:700 14px system-ui;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:0 0 8px">Kontakt</h3>' +
@@ -52,13 +37,14 @@ function buildHtml(d) {
     "<tr><td style='padding:3px 14px 3px 0;color:#777'>E-mail</td><td><a href='mailto:" + esc(d.email) + "'>" + esc(d.email) + "</a></td></tr>" +
     (d.phone ? "<tr><td style='padding:3px 14px 3px 0;color:#777'>Telefon</td><td>" + esc(d.phone) + "</td></tr>" : "") +
     (d.company ? "<tr><td style='padding:3px 14px 3px 0;color:#777'>Firma</td><td>" + esc(d.company) + "</td></tr>" : "") +
+    (d.oldSite ? "<tr><td style='padding:3px 14px 3px 0;color:#777'>Stara strona</td><td><a href='" + esc(d.oldSite) + "'>" + esc(d.oldSite) + "</a></td></tr>" : "") +
     "</table>" +
 
-    '<h3 style="font:700 14px system-ui;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:0 0 8px">Opis projektu</h3>' +
-    '<div style="background:#f6f6f8;border-radius:8px;padding:14px 16px;margin:0 0 22px;white-space:pre-wrap">' + esc(d.brief) + "</div>" +
+    '<h3 style="font:700 14px system-ui;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:0 0 10px">Podsumowanie rozmowy</h3>' +
+    '<div style="background:#f6f6f8;border-radius:8px;padding:14px 16px;margin:0 0 22px;white-space:pre-wrap">' + esc(d.summary) + "</div>" +
 
-    '<h3 style="font:700 14px system-ui;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:0 0 10px">Wybrane style (' + d.chosen.length + ")</h3>" +
-    chosen +
+    '<h3 style="font:700 14px system-ui;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:0 0 10px">Pełne odpowiedzi</h3>' +
+    answersHtml(d.answers) +
 
     (d.note
       ? '<h3 style="font:700 14px system-ui;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:18px 0 8px">Uwagi klienta</h3>' +
@@ -70,7 +56,7 @@ function buildHtml(d) {
 
 function buildText(d) {
   const lines = [
-    "NOWY BRIEF Z KREATORA STYLU",
+    "NOWE ZGŁOSZENIE Z BOTA-DORADCY",
     d.stamp,
     "",
     "KONTAKT",
@@ -79,11 +65,11 @@ function buildText(d) {
   ];
   if (d.phone) lines.push("Telefon: " + d.phone);
   if (d.company) lines.push("Firma:   " + d.company);
-  lines.push("", "OPIS PROJEKTU", d.brief, "", "WYBRANE STYLE");
-  d.chosen.forEach((s, i) => {
-    lines.push(i + 1 + ". " + s.name + " (" + s.id + " · " + s.family + ")");
-    if (s.reason) lines.push("   " + s.reason);
-    if (s.palette) lines.push("   " + Object.entries(s.palette).map(([k, v]) => k + ":" + v).join("  "));
+  if (d.oldSite) lines.push("Stara strona: " + d.oldSite);
+  lines.push("", "PODSUMOWANIE", d.summary, "", "PEŁNE ODPOWIEDZI");
+  d.answers.forEach((a) => {
+    lines.push("- " + a.question);
+    lines.push("  " + a.answer);
   });
   if (d.note) lines.push("", "UWAGI KLIENTA", d.note);
   return lines.join("\n");
@@ -99,14 +85,19 @@ export default async function handler(req, res) {
   const email = String(body.email || "").trim().slice(0, 160);
   const phone = String(body.phone || "").trim().slice(0, 60);
   const company = String(body.company || "").trim().slice(0, 160);
-  const brief = String(body.brief || "").trim().slice(0, 2000);
+  const oldSite = String(body.oldSite || "").trim().slice(0, 300);
   const note = String(body.note || "").trim().slice(0, 1000);
-  const chosen = Array.isArray(body.chosen) ? body.chosen.slice(0, 4) : [];
+  const summary = String(body.summary || "").trim().slice(0, 3000);
+  const answers = Array.isArray(body.answers)
+    ? body.answers
+        .filter((a) => a && typeof a.question === "string" && typeof a.answer === "string")
+        .map((a) => ({ question: a.question.slice(0, 200), answer: a.answer.slice(0, 800) }))
+        .slice(0, 20)
+    : [];
 
   if (!name) return res.status(400).json({ error: "Podaj imię." });
   if (!validEmail(email)) return res.status(400).json({ error: "Podaj poprawny adres e-mail." });
-  if (brief.length < 10) return res.status(400).json({ error: "Opis projektu jest za krótki." });
-  if (!chosen.length) return res.status(400).json({ error: "Wybierz przynajmniej jeden styl." });
+  if (!answers.length) return res.status(400).json({ error: "Brak odpowiedzi z rozmowy." });
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -114,7 +105,7 @@ export default async function handler(req, res) {
   }
 
   const data = {
-    name, email, phone, company, brief, note, chosen,
+    name, email, phone, company, oldSite, note, summary, answers,
     stamp: new Date().toLocaleString("pl-PL", { timeZone: "Europe/Warsaw" })
   };
 
@@ -129,7 +120,7 @@ export default async function handler(req, res) {
         from: FROM,
         to: [TO],
         reply_to: email,
-        subject: "Brief: " + (company || name) + " — " + chosen.map((c) => c.name).join(" + "),
+        subject: "Zgłoszenie: " + (company || name),
         html: buildHtml(data),
         text: buildText(data)
       })

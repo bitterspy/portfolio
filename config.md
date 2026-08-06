@@ -46,15 +46,19 @@ potem przenieś zmiany do HTML.
 4. Umiejętności — lista technologii (Next.js, React, TypeScript, Tailwind, Supabase, Node.js, Vercel, git)
 5. Kontakt — email, telefon, GitHub
 
-## Kreator stylu (`/kreator.html`)
+## Bot doradca (w hero, `chat.js`)
 
-Zastąpił czat AI (usunięty 2026-08-02 — trzymał klucz Groq wprost w kodzie frontendu, więc byłby publiczny).
+Zastąpił kreator stylu (wycofany 2026-08-06 — wybór z biblioteki 106 stylów oceniony jako zbędny krok; klient wprost chce porozmawiać o starej stronie i zmianach, nie wybierać gotowych szablonów).
 
-- Trzy kroki: opis firmy → wybór 2 z 6 dobranych stylów → formularz kontaktowy
-- `api/match-style.js` — filtr słów kluczowych po `data/styles.json` (106 stylów), potem Groq układa kolejność i pisze uzasadnienia. Bez klucza działa sam filtr.
-- `api/send-brief.js` — wysyłka briefu przez Resend na connect.szczecin@gmail.com
+- Scripted flow w `chat.js`: stałe pytania bota (stara strona/link → co irytuje → kolor → styl → układ → menu → uwagi) z chipami szybkich odpowiedzi lub polem tekstowym, potem formularz kontaktowy wbudowany jako ostatni krok czatu
+- `api/chat-summary.js` — Groq składa zwięzłe podsumowanie rozmowy do maila (bez klucza: surowe odpowiedzi jedna pod drugą)
+- `api/send-brief.js` — wysyłka briefu (kontakt + stara strona + podsumowanie + pełne odpowiedzi) przez Resend na connect.szczecin@gmail.com
 - Klucze **wyłącznie po stronie serwera**, jako zmienne środowiskowe Vercela: `GROQ_API_KEY` (ustawiony, dedykowany dla tego projektu), `RESEND_API_KEY` (do ustawienia)
-- Podglądy stylów renderowane na żywo z tokenów w `styles.json` — to, co klient wybierze, tak zostanie zbudowane
+
+## Motyw ciemny/jasny (`theme.js`)
+
+Przełącznik ☀︎/☾ w nawigacji, zapis wyboru w `localStorage` (`connect_theme`). Domyślnie ciemny.
+Paleta jasna to prosty zestaw tokenów CSS ("papier kredowy", bez tekstury) — patrz `html[data-theme="light"]` w `style.css`.
 
 ## TODO
 
