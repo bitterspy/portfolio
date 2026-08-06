@@ -1,12 +1,12 @@
 :root,
 html[data-theme="dark"] {
-  --bg: #0b0b14;
-  --bg-rgb: 11, 11, 20;
-  --bg-alt: #12121f;
-  --card: #171728;
-  --border: #26263c;
+  --bg: #14141f;
+  --bg-rgb: 20, 20, 31;
+  --bg-alt: #1a1a29;
+  --card: #1c1c2e;
+  --border: #2c2c42;
   --text: #f2f2f7;
-  --text-dim: #9a9ab3;
+  --text-dim: #a3a3ba;
   --violet: #8b5cf6;
   --violet-2: #6366f1;
   --grad: linear-gradient(135deg, var(--violet-2), var(--violet));
@@ -353,78 +353,6 @@ h1, h2, h3 { margin: 0; }
   margin: 2px 0 0;
 }
 
-/* Makieta realizacji przeniesiona do sekcji Portfolio jako wyrozniona karta */
-.work__featured {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 0;
-  align-items: stretch;
-}
-.work__featured .work__meta {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 32px 34px;
-}
-.work__featured-label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--violet);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 10px;
-}
-.mock {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-alt);
-  overflow: hidden;
-  text-decoration: none;
-}
-.mock__bar {
-  display: flex;
-  gap: 6px;
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--border);
-}
-.mock__bar span {
-  width: 9px; height: 9px; border-radius: 50%;
-  background: #35354e;
-}
-.mock__reel {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/10;
-  overflow: hidden;
-}
-.mock__screen {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  opacity: 0;
-  animation: mock-crossfade 24s infinite;
-}
-.mock__screen--f1 { animation-delay: 0s; }
-.mock__screen--f2 { animation-delay: 4s; }
-.mock__screen--f3 { animation-delay: 8s; }
-.mock__screen--f4 { animation-delay: 12s; }
-.mock__screen--f4b { animation-delay: 16s; }
-.mock__screen--f5 { animation-delay: 20s; }
-
-@keyframes mock-crossfade {
-  0% { opacity: 0; }
-  12.5% { opacity: 1; }
-  16.67% { opacity: 1; }
-  29.17% { opacity: 0; }
-  100% { opacity: 0; }
-}
-
 /* Work / Portfolio */
 .work {
   max-width: 1180px;
@@ -466,33 +394,6 @@ h1, h2, h3 { margin: 0; }
   height: 100%;
   object-fit: cover;
   object-position: top;
-}
-.work__thumb-tag {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  color: var(--text-dim);
-  border: 1px solid rgba(255,255,255,0.12);
-}
-.work__thumb-tag--live {
-  background: var(--grad);
-  color: #fff;
-  border: none;
-}
-/* Wersja przy tytule (karta wyrozniona) zamiast overlay na zdjeciu */
-h3 > .work__thumb-tag {
-  position: static;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 8px;
-  font-size: 0.62rem;
 }
 .work__meta { padding: 22px; }
 .work__meta h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
@@ -590,7 +491,6 @@ h3 > .work__thumb-tag {
 
 @media (max-width: 900px) {
   .hero__inner { grid-template-columns: 1fr; }
-  .work__featured { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
